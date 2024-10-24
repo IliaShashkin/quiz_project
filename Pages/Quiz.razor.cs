@@ -14,6 +14,9 @@ public sealed partial class Quiz
         _correctAnswer = 0;
         _revealCorrectAnswer = false;
     }
+    
+    
+    
 }
 
 public sealed class Idiom
