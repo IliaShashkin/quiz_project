@@ -14,8 +14,20 @@ public sealed partial class Quiz
         _correctAnswer = 0;
         _revealCorrectAnswer = false;
     }
-    
-    
+
+    private void LocalData()
+    {
+        string[] csvFile = IdiomData.Data.Split(Environment.NewLine);
+        var idioms = new Idiom[csvFile.Length];
+        for (int i = 1; i < csvFile.Length; i++)
+        {
+            string[] columns = csvFile[i].Split(';');
+            idioms[i - 1] = new Idiom(columns[0], columns[1],columns[2..]);
+            
+        }
+        Random.Shared.Shuffle(idioms);
+        _idioms = idioms;
+    }
     
 }
 
