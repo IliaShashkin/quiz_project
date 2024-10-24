@@ -13,9 +13,11 @@ public sealed partial class Quiz
         _currentQuestionIdx = 0;
         _correctAnswer = 0;
         _revealCorrectAnswer = false;
+
+        LoadData();
     }
 
-    private void LocalData()
+    private void LoadData()
     {
         string[] csvFile = IdiomData.Data.Split(Environment.NewLine);
         var idioms = new Idiom[csvFile.Length];
