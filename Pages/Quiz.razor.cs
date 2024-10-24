@@ -2,7 +2,41 @@
 
 public sealed partial class Quiz
 {
+    private Idiom[] _idioms;
+    private int _currentQuestionIdx;
+    private int _correctAnswer;
+    private bool _revealCorrectAnswer;
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _currentQuestionIdx = 0;
+        _correctAnswer = 0;
+        _revealCorrectAnswer = false;
+    }
+}
+
+public sealed class Idiom
+{
+    private readonly string _correctInterpretation;
+    public string IdiomText { get; }
+    public string[] Answers { get; }
+
+    public Idiom(string idiom, string correctInterpretation, string[] incorrectInterpretations)
+    {
+        _correctInterpretation = correctInterpretation;
+        IdiomText = idiom;
+        Answers = ShuffleAnswers(correctInterpretation,incorrectInterpretations);
+    }
+
+    public bool IsCorrectAnswer(string answer) => answer == _correctInterpretation;
+
+    private static string[] ShuffleAnswers(string correctInterpretation, string[] incorrectInterpretations)
+    {
+        string[] answers = [correctInterpretation, ..incorrectInterpretations];
+        Random.Shared.Shuffle(answers);
+        return answers;
+    }
 }
 public static class IdiomData
 {
